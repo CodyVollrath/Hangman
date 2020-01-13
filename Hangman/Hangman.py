@@ -17,14 +17,13 @@ class Hangman:
                 mask += char + " "
             else:
                 mask += "_ "
-        return mask
+        return "\nWord: " + mask + "\n"
     def changeWord(self, word):
         if word.__contains__('_'):
             print("Invalid character in word")
         else:
             self.word = word
     def guess(self, letter):
-        self.displayLettersTried()
         if self.incorrectGuesses < self.MAX_GUESSES:
             letter = letter.lower()
             if letter in self.lettersTried:
@@ -37,14 +36,12 @@ class Hangman:
                     return self.drawHangman()
             return self.getWord()
         else:
-            return self.WORD
+            return self.LOSE
 
     def displayLettersTried(self):
-        print("-"*15)
         print("Letters Tried: \n" + ', '.join(self.lettersTried))
-        print("-"*15)
     def drawHangman(self):
-        lines = "\n"+ "="*10 + "\n"
+        lines = "\n"+ "="*20 + "\n"
         firstGuess = '''
         ____|____     
         '''
@@ -92,14 +89,14 @@ class Hangman:
         '''
         sixthGuess = self.LOSE
         if self.incorrectGuesses == 1:
-            return lines + firstGuess + lines
+            return lines + firstGuess + lines + self.getWord()
         if self.incorrectGuesses == 2:
-            return lines + secondGuess + lines
+            return lines + secondGuess + lines + self.getWord()
         if self.incorrectGuesses == 3:
-            return lines + thirdGuess + lines
+            return lines + thirdGuess + lines + self.getWord()
         if self.incorrectGuesses == 4:
-            return lines + fourthGuess + lines
+            return lines + fourthGuess + lines + self.getWord()
         if self.incorrectGuesses == 5:
-            return lines + fifthGuess + lines
+            return lines + fifthGuess + lines + self.getWord()
         if self.incorrectGuesses == 6:
-            return lines + sixthGuess + lines
+            return lines + sixthGuess + lines + self.getWord()

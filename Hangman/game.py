@@ -5,12 +5,13 @@ game = Hangman(word)
 print("Game has started:\n\n")
 print(game.getWord() + "\n\n")
 letter = input("Enter a letter (enter only one letter) -> ")
-again = True
 
-while len(letter) <= 1 and again:
+while len(letter) <= 1:
     signal  = game.guess(letter)
     print(signal)
+    game.displayLettersTried()
     if signal == game.LOSE:
+        print("Word was: " + game.word)
         break
     else:
         if not game.getWord().__contains__("_"):
